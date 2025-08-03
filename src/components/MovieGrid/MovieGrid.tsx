@@ -3,16 +3,18 @@ import type { Movie } from "../../types/movie";
 
 interface MovieGridProps {
     movies: Movie[];
-    }
-export default function MovieGrid({ movies }: MovieGridProps) {
+    onSelect: (movie: Movie) => void;
+}
+    
+export default function MovieGrid({ movies, onSelect }: MovieGridProps) {
     return (
         <ul className={css.grid}>
             {movies.map((movie) => (
-                <li>
+                <li key={movie.id} onClick={() => onSelect(movie)}>
                     <div className={css.card}>
                         <img 
 		                    className={css.image} 
-		                    src="https://image.tmdb.org/t/p/w500/{movie.poster_path}" 
+                            src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} 
 		                    alt={movie.title} 
 		                    loading="lazy" 
 		                />
